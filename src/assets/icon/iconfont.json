@@ -1,0 +1,23 @@
+{
+  "id": "3239735",
+  "name": "Models",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-models",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "8760187",
+      "name": "github",
+      "font_class": "github",
+      "unicode": "e64c",
+      "unicode_decimal": 58956
+    },
+    {
+      "icon_id": "5248736",
+      "name": "metamask",
+      "font_class": "metamask-icon",
+      "unicode": "e60a",
+      "unicode_decimal": 58890
+    }
+  ]
+}
