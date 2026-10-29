@@ -28,6 +28,12 @@ Use these shortcuts while working on the graph canvas. On macOS, use Command in 
 
 Hold Shift and drag to pan the canvas, or hold Ctrl/Command and scroll to zoom. Right-click a cell to open its editing dialog.
 
+## Local graph storage
+
+Graph changes are saved in the current browser's local storage and loaded again when the editor opens. The saved graph belongs to that browser and site origin; it is not automatically synchronized to other browsers or devices.
+
+Clearing the site's browser storage also removes this saved graph. Use the toolbar's **Download model** action to keep a separate JSON copy of important models.
+
 ## Other commands
 
 - `npm run build` creates a production build in `dist/`.
