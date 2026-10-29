@@ -11,6 +11,23 @@ npm run serve
 
 Open the local URL printed by the development server.
 
+## Editor controls
+
+Use these shortcuts while working on the graph canvas. On macOS, use Command in place of Ctrl.
+
+| Action | Shortcut |
+| --- | --- |
+| Copy selected cells | Ctrl+C |
+| Cut selected cells | Ctrl+X |
+| Paste copied cells | Ctrl+V |
+| Undo | Ctrl+Z |
+| Redo | Ctrl+Shift+Z |
+| Select all nodes | Ctrl+A |
+| Zoom in | Ctrl+1 |
+| Zoom out | Ctrl+2 |
+
+Hold Shift and drag to pan the canvas, or hold Ctrl/Command and scroll to zoom. Right-click a cell to open its editing dialog.
+
 ## Other commands
 
 - `npm run build` creates a production build in `dist/`.
