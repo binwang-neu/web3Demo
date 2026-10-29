@@ -31,6 +31,7 @@ Hold Shift and drag to pan the canvas, or hold Ctrl/Command and scroll to zoom. 
 ## Other commands
 
 - `npm run build` creates a production build in `dist/`.
-- `npm run lint` checks the Vue and JavaScript source.
+- `npm run lint` checks the Vue and JavaScript source and automatically fixes supported issues.
+- `npm run lint -- --no-fix` checks the source without modifying files.
 
 The project uses older Vue CLI and `node-sass` dependencies. If installation fails on a current Node.js release, use a Node.js version compatible with the versions in `package-lock.json`.
