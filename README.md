@@ -79,3 +79,16 @@ npm run lint -- --no-fix
 # Check source and apply supported fixes
 npm run lint
 ```
+
+## Deploy under the correct base path
+
+The production build currently uses `/antV-X6-demo/` as its base path, as configured in `vue.config.js`. Deploy the contents of `dist/` at that path so the browser can load the generated JavaScript, styles, and other assets.
+
+If your deployment uses a different location, update the production `publicPath` in `vue.config.js` **before running `npm run build`**:
+
+| Deployment location | Production `publicPath` |
+| --- | --- |
+| A domain's root, such as `https://example.com/` | `/` |
+| This repository's GitHub Pages path, such as `https://binwang-neu.github.io/web3Deom/` | `/web3Deom/` |
+
+The GitHub Pages URL above is a deployment example; building the project does not publish it automatically. Rebuild after changing `publicPath`, then publish the new `dist/` contents to your hosting service.
