@@ -1,84 +1,80 @@
 # Web3 Demo
 
-A graph editor built with **Vue 2**, **AntV X6**, and **Element UI**.
+A browser-based graph editor powered by **Vue 2**, **AntV X6**, and **Element UI**.
 
-Create and edit graphs in your browser, save changes locally, and export models as JSON backups.
+Edit graphs on the canvas, restore your last local session, and exchange models through JSON files.
 
-## Quick start
+## Get started
 
 ```sh
 npm ci
 npm run serve
 ```
 
-Open the development server URL shown in the terminal.
+Open the URL printed in the terminal.
 
-> This project uses legacy Vue CLI and `node-sass` dependencies. If installation fails, check that your Node.js version is compatible with the versions in `package-lock.json`.
+**Node.js compatibility:** The project uses older Vue CLI and `node-sass` dependencies. Use a Node.js version compatible with the dependency versions recorded in `package-lock.json`.
 
-## Working with the editor
+## Edit a graph
 
-### Canvas interactions
+### Mouse controls
 
-- **Pan:** hold Shift and drag.
-- **Zoom:** hold Ctrl and scroll, or Command and scroll on macOS.
-- **Edit a cell:** right-click it to open its editing dialog.
+| To… | Use… |
+| --- | --- |
+| Move around the canvas | Shift + drag |
+| Zoom | Ctrl + scroll |
+| Edit a cell | Right-click the cell |
+
+On macOS, use **Command** instead of **Ctrl**.
 
 ### Keyboard shortcuts
 
-Use these shortcuts while working on the canvas. On macOS, use **Command** instead of **Ctrl**.
+These shortcuts apply while working on the graph canvas.
 
-| Action | Shortcut |
-| --- | --- |
-| Copy selected cells | Ctrl+C |
-| Cut selected cells | Ctrl+X |
-| Paste | Ctrl+V |
-| Undo | Ctrl+Z |
-| Redo | Ctrl+Shift+Z |
-| Select all nodes | Ctrl+A |
-| Zoom in | Ctrl+1 |
-| Zoom out | Ctrl+2 |
+| Action | Windows / Linux | macOS |
+| --- | --- | --- |
+| Copy | Ctrl+C | ⌘C |
+| Cut | Ctrl+X | ⌘X |
+| Paste | Ctrl+V | ⌘V |
+| Undo | Ctrl+Z | ⌘Z |
+| Redo | Ctrl+Shift+Z | ⌘⇧Z |
+| Select all nodes | Ctrl+A | ⌘A |
+| Zoom in | Ctrl+1 | ⌘1 |
+| Zoom out | Ctrl+2 | ⌘2 |
 
-## Saving and restoring models
+## Save and transfer your work
 
-### Automatic saving
+### Local saving
 
-Graph changes are saved to the browser's local storage and loaded when you reopen the editor.
+The editor automatically saves graph changes in your browser and reloads them when you return.
 
-This is local persistence, not a separate backup. Saved graphs are tied to the browser and site origin, are not synchronized across devices, and are removed when you clear the site's browser data.
+Saved data is specific to the **browser and site origin**—the protocol, hostname, and port. It is not automatically synchronized across browsers or devices.
 
-### Export a backup
+> Clearing the site's browser storage deletes the locally saved graph. Export important models as JSON backups.
 
-Click **Download model** in the toolbar to save the current model as a JSON file.
+### Export a model
 
-Keep this file if you need to preserve a model independently of browser storage or transfer it to another browser.
+Click **Download model** in the toolbar to save a JSON file containing the current graph and its configuration.
 
-### Restore from a backup
+### Import a model
 
-1. Back up the current graph if you want to keep it.
-2. Open the exported JSON file in a text editor and copy its contents.
-3. Click **Upload existing models** in the editor.
+1. Export the current graph if you need to preserve it.
+2. Open the backup JSON file in a text editor and copy its contents.
+3. Click **Upload existing models**.
 4. Paste the JSON into the text area.
 5. Click **Submit Model**.
 
-> **Restoring replaces the current graph.** Imported content is not merged with the existing graph.
+**Before importing:**
 
-### What a backup restores
+- Import replaces the current graph; it does not merge models.
+- Import restores graph data only. Configuration settings included in the exported file are not applied.
 
-The exported JSON contains graph data and configuration data. Import currently restores **graph data only**; exported configuration settings are not applied.
+## Development
 
-## Development commands
-
-| Command | Description |
+| Command | Result |
 | --- | --- |
+| `npm ci` | Install dependencies from the lockfile |
 | `npm run serve` | Start the development server |
-| `npm run build` | Generate the production build in `dist/` |
-| `npm run lint -- --no-fix` | Check source without changing files |
-| `npm run lint` | Check source and automatically fix supported issues |
-
-## Troubleshooting
-
-| Issue | What to check |
-| --- | --- |
-| Installation fails | Verify Node.js compatibility with the locked Vue CLI and `node-sass` versions |
-| A saved graph is missing | Confirm you are using the same browser and site origin, and that site data has not been cleared |
-| Imported configuration does not take effect | Configuration restoration is not currently supported; only graph data is restored |
+| `npm run build` | Write a production build to `dist/` |
+| `npm run lint -- --no-fix` | Check source without modifying files |
+| `npm run lint` | Check source and apply supported fixes |
