@@ -1,19 +1,27 @@
 # Web3 Demo
 
-A Vue 2 graph editor built with AntV X6 and Element UI.
+A browser-based graph editor built with **Vue 2**, **AntV X6**, and **Element UI**.
 
-## Run locally
+Edit graphs, use keyboard shortcuts, and export models as JSON files for backup or transfer.
+
+## Getting started
+
+Install dependencies and start the development server:
 
 ```sh
 npm ci
 npm run serve
 ```
 
-Open the local URL printed by the development server.
+Open the local URL printed in the terminal.
+
+> **Compatibility:** This project uses older Vue CLI and `node-sass` dependencies. Use a Node.js version compatible with the dependency versions in `package-lock.json` if installation fails on a newer release.
 
 ## Editor controls
 
-Use these shortcuts while working on the graph canvas. On macOS, use Command in place of Ctrl.
+### Keyboard shortcuts
+
+Use these shortcuts while working on the graph canvas. On macOS, replace **Ctrl** with **Command**.
 
 | Action | Shortcut |
 | --- | --- |
@@ -26,27 +34,52 @@ Use these shortcuts while working on the graph canvas. On macOS, use Command in 
 | Zoom in | Ctrl+1 |
 | Zoom out | Ctrl+2 |
 
-Hold Shift and drag to pan the canvas, or hold Ctrl/Command and scroll to zoom. Right-click a cell to open its editing dialog.
+### Mouse controls
 
-## Local graph storage
+| Action | Control |
+| --- | --- |
+| Pan the canvas | Hold Shift and drag |
+| Zoom the canvas | Hold Ctrl/Command and scroll |
+| Open a cell's editing dialog | Right-click the cell |
 
-Graph changes are saved in the current browser's local storage and loaded again when the editor opens. The saved graph belongs to that browser and site origin; it is not automatically synchronized to other browsers or devices.
+## Saving your work
 
-Clearing the site's browser storage also removes this saved graph. Use the toolbar's **Download model** action to keep a separate JSON copy of important models.
+Graph changes are automatically saved to the current browser's **local storage** and restored when the editor opens again.
 
-### Export and restore a model
+Local storage is specific to the browser and site origin:
 
-1. Click **Download model** to export the current model as a JSON file.
-2. To restore it, open the JSON file in a text editor and copy its contents.
-3. Click **Upload existing models**, paste the JSON into the text area, and click **Submit Model**.
-4. Importing replaces the current graph rather than merging with it. Export the current graph first if you need to preserve it.
+- Graphs are not automatically synchronized across browsers or devices.
+- Opening the editor from a different origin uses separate storage.
+- Clearing the site's browser data deletes the locally saved graph.
 
-The exported file includes graph data and configuration data. The current import implementation restores the graph but does not apply the exported configuration settings.
+Use **Download model** to keep a separate JSON backup of important work.
 
-## Other commands
+## Exporting and restoring models
 
-- `npm run build` creates a production build in `dist/`.
-- `npm run lint` checks the Vue and JavaScript source and automatically fixes supported issues.
-- `npm run lint -- --no-fix` checks the source without modifying files.
+### Export a model
 
-The project uses older Vue CLI and `node-sass` dependencies. If installation fails on a current Node.js release, use a Node.js version compatible with the versions in `package-lock.json`.
+Click **Download model** in the toolbar to export the current model as a JSON file.
+
+### Restore a model
+
+1. Export the current graph if you want to keep it.
+2. Open the saved JSON file in a text editor and copy its contents.
+3. Click **Upload existing models**.
+4. Paste the JSON into the text area.
+5. Click **Submit Model**.
+
+> **Import replaces the current graph.** It does not merge the imported model with existing content.
+
+### Configuration limitation
+
+Exported models include both graph data and configuration data. The current import implementation restores **only the graph data**; it does not apply the exported configuration settings.
+
+## Available commands
+
+| Command | Purpose |
+| --- | --- |
+| `npm ci` | Install dependencies using `package-lock.json` |
+| `npm run serve` | Start the local development server |
+| `npm run build` | Create a production build in `dist/` |
+| `npm run lint` | Check Vue and JavaScript source and apply supported fixes |
+| `npm run lint -- --no-fix` | Check source without modifying files |
