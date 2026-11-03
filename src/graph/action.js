@@ -1,5 +1,5 @@
-import { result } from 'lodash';
-import { pow, divide, multiply, subtract, chain } from 'mathjs';
+import { pow, divide, subtract, chain } from 'mathjs';
+import { createParticipantMap, createParticipantRecord } from './participants.js';
 export class Action {
 
     constructor() {
@@ -26,48 +26,21 @@ export class Stake {
         this.rewardDefactor = rewardPolicy.rewardDefactor;
 
         // 获取 stakeAmount 数据
-        this.stakeAmount = new Map();
-        this.stakeAmount.set("team", stakeAmount.team);
-        this.stakeAmount.set("investor", stakeAmount.investor);
-        this.stakeAmount.set("advisor", stakeAmount.advisor);
-        this.stakeAmount.set("foundation", stakeAmount.foundation);
-        this.stakeAmount.set("community", stakeAmount.community);
+        this.stakeAmount = createParticipantMap(participant => stakeAmount[participant]);
 
         // 初始化 inPoolAmount, inPoolTotal, inPoolAmountDelta
         // inPoolAmount 表示已经质押在池子里的数量
-        this.inPoolAmount = new Map();
-        this.inPoolAmount.set("team", 0);
-        this.inPoolAmount.set("investor", 0);
-        this.inPoolAmount.set("advisor", 0);
-        this.inPoolAmount.set("foundation", 0);
-        this.inPoolAmount.set("community", 0);
-
         this.inPoolAmount = 0;
 
-        this.inPoolAmountDelta = new Map();
-        this.inPoolAmountDelta.set("team", 0);
-        this.inPoolAmountDelta.set("investor", 0);
-        this.inPoolAmountDelta.set("advisor", 0);
-        this.inPoolAmountDelta.set("foundation", 0);
-        this.inPoolAmountDelta.set("community", 0);
+        this.inPoolAmountDelta = createParticipantMap();
 
         // 初始化 rewardAllocated, rewardAllocatedTotal, rewardAllocatedDelta
         // rewardAllocated 表示已经分配的收益
-        this.rewardAllocated = new Map();
-        this.rewardAllocated.set("team", 0);
-        this.rewardAllocated.set("investor", 0);
-        this.rewardAllocated.set("advisor", 0);
-        this.rewardAllocated.set("foundation", 0);
-        this.rewardAllocated.set("community", 0);
+        this.rewardAllocated = createParticipantMap();
 
         this.rewardAllocatedTotal = 0;
 
-        this.rewardAllocatedDelta = new Map();
-        this.rewardAllocatedDelta.set("team", 0);
-        this.rewardAllocatedDelta.set("investor", 0);
-        this.rewardAllocatedDelta.set("advisor", 0);
-        this.rewardAllocatedDelta.set("foundation", 0);
-        this.rewardAllocatedDelta.set("community", 0);
+        this.rewardAllocatedDelta = createParticipantMap();
 
     }
 
@@ -101,12 +74,7 @@ export class Unstake {
         this.coolTime = coolTime;
 
         // 获取 unstakeAmount note: unstakeAmount is the weight of unstake
-        this.unstakeAmount = new Map();
-        this.unstakeAmount.set("team", unstakeAmount.team);
-        this.unstakeAmount.set("investor", unstakeAmount.investor);
-        this.unstakeAmount.set("advisor", unstakeAmount.advisor);
-        this.unstakeAmount.set("foundation", unstakeAmount.foundation);
-        this.unstakeAmount.set("community", unstakeAmount.community);
+        this.unstakeAmount = createParticipantMap(participant => unstakeAmount[participant]);
         // 初始化 unstakeHistory
         this.unstakeHistory = new Map();
 
@@ -194,36 +162,13 @@ export class Vest {
 
     constructor(vestAmount, vestPolicy) {
         // 获取 vestAmount 数据 note: vestAmount is the weight of vest
-        this.vestAmount = new Map();
-        this.vestAmount.set("team", vestAmount.team);
-        this.vestAmount.set("investor", vestAmount.investor);
-        this.vestAmount.set("advisor", vestAmount.advisor);
-        this.vestAmount.set("foundation", vestAmount.foundation);
-        this.vestAmount.set("community", vestAmount.community);
+        this.vestAmount = createParticipantMap(participant => vestAmount[participant]);
 
         // 获取 vestPolicy 数据
         this.vestPolicy = {
-            vestTime: {
-                team:       vestPolicy.team.lockupTime,
-                investor:   vestPolicy.investor.lockupTime,
-                advisor:    vestPolicy.advisor.lockupTime,
-                foundation: vestPolicy.foundation.lockupTime,
-                community:  vestPolicy.community.lockupTime,
-            },
-            releasePeriod: {
-                team:       vestPolicy.team.releasePeriod,
-                investor:   vestPolicy.investor.releasePeriod,
-                advisor:    vestPolicy.advisor.releasePeriod,
-                foundation: vestPolicy.foundation.releasePeriod,
-                community:  vestPolicy.community.releasePeriod,
-            },
-            cliff: {
-                team:       vestPolicy.team.cliff,
-                investor:   vestPolicy.investor.cliff,
-                advisor:    vestPolicy.advisor.cliff,
-                foundation: vestPolicy.foundation.cliff,
-                community:  vestPolicy.community.cliff,
-            }
+            vestTime: createParticipantRecord(participant => vestPolicy[participant].lockupTime),
+            releasePeriod: createParticipantRecord(participant => vestPolicy[participant].releasePeriod),
+            cliff: createParticipantRecord(participant => vestPolicy[participant].cliff)
         };
 
         // 初始化 vestHistory

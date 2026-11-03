@@ -80,6 +80,14 @@ npm run lint -- --no-fix
 npm run lint
 ```
 
+Graph state regression tests use the Node.js test runner and require Node.js 22.7 or newer:
+
+```sh
+npm run test:graph
+```
+
+These tests cover participant values, policy projections, map iteration order, and isolation between state fields and model instances. They do not require starting the editor or compiling Sass.
+
 ## Deploy under the correct base path
 
 The production build currently uses `/antV-X6-demo/` as its base path, as configured in `vue.config.js`. Deploy the contents of `dist/` at that path so the browser can load the generated JavaScript, styles, and other assets.
