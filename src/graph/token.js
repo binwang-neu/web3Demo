@@ -1,3 +1,8 @@
+import { createParticipantMap } from './participants.js';
+
+const TOKEN_PARTICIPANTS = ["team", "community", "investor", "foundation", "advisor"];
+const createTokenMap = valueFor => createParticipantMap(valueFor, TOKEN_PARTICIPANTS);
+
 export class Token {
 
     // allocationPolicy {
@@ -26,12 +31,7 @@ export class Token {
         this.allocationPercent.set("advisor", allocationPolicy.allocationPercent.advisor);
 
         // 初始化 allocatedAmount
-        this.allocatedAmount = new Map();
-        this.allocatedAmount.set("team", 0);
-        this.allocatedAmount.set("community", 0);
-        this.allocatedAmount.set("investor", 0);
-        this.allocatedAmount.set("foundation", 0);
-        this.allocatedAmount.set("advisor", 0);
+        this.allocatedAmount = createTokenMap();
 
         // 获取 communityPolicy
         this.communityPolicy = {
@@ -46,40 +46,20 @@ export class Token {
         }
 
         // 初始化 stakedAmount, stakedTotal, stakedAmountDelta 
-        this.stakedAmount = new Map();
-        this.stakedAmount.set("team", 0);
-        this.stakedAmount.set("community", 0);
-        this.stakedAmount.set("investor", 0);
-        this.stakedAmount.set("foundation", 0);
-        this.stakedAmount.set("advisor", 0);
+        this.stakedAmount = createTokenMap();
 
         this.stakedTotal = 0;
 
-        this.stakedAmountDelta = new Map();
-        this.stakedAmountDelta.set("team", 0);
-        this.stakedAmountDelta.set("community", 0);
-        this.stakedAmountDelta.set("investor", 0);
-        this.stakedAmountDelta.set("foundation", 0);
-        this.stakedAmountDelta.set("advisor", 0);
+        this.stakedAmountDelta = createTokenMap();
 
         // TODO stakedPercent 是否必要？
         
         // 初始化 freeMoney, freeMoneyTotal, freeMoneyDelta
-        this.freeMoney = new Map();
-        this.freeMoney.set("team", 0);
-        this.freeMoney.set("community", 0);
-        this.freeMoney.set("investor", 0);
-        this.freeMoney.set("foundation", 0);
-        this.freeMoney.set("advisor", 0);
+        this.freeMoney = createTokenMap();
 
         this.freeMoneyTotal = 0;
 
-        this.freeMoneyDelta = new Map();
-        this.freeMoneyDelta.set("team", 0);
-        this.freeMoneyDelta.set("community", 0);
-        this.freeMoneyDelta.set("investor", 0);
-        this.freeMoneyDelta.set("foundation", 0);
-        this.freeMoneyDelta.set("advisor", 0);
+        this.freeMoneyDelta = createTokenMap();
 
         // TODO freeMoneyPercent 是否必要？
     }
